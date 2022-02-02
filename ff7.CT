@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="38">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"max hp"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>define(address,"ff7remake_.exe"+AFB738)
+define(bytes,89 7C 01 30 48 8B 5C 24 30)
+
+[ENABLE]
+
+
+assert(address,bytes)
+alloc(newmem,$1000,"ff7remake_.exe"+AFB738)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //rcx: index
+  //rax: pointer
+  mov edi, [rcx+rax+34] // max hp
+  mov [rcx+rax+30],edi
+
+  // 挨揍的时候增加一些属性
+  mov [rcx+rax+48],#10000 // Attack
+  mov [rcx+rax+4C],#10000 // Magic Attack
+  mov [rcx+rax+50],#10000 // Defense
+  mov [rcx+rax+44],#10000 // Magic Defense
+  mov rbx,[rsp+30]
+  jmp return
+
+address:
+  jmp newmem
+  nop 4
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+  // mov [rcx+rax+30],edi
+  // mov rbx,[rsp+30]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ff7remake_.exe+AFB738
+
+ff7remake_.exe+AFB709: E8 F2 AB 02 00        - call ff7remake_.exe+B26300
+ff7remake_.exe+AFB70E: 48 89 05 D3 1F CA 04  - mov [ff7remake_.exe+579D6E8],rax
+ff7remake_.exe+AFB715: 48 8B 80 80 6D 0B 00  - mov rax,[rax+000B6D80]
+ff7remake_.exe+AFB71C: 80 FB 08              - cmp bl,08
+ff7remake_.exe+AFB71F: 73 1B                 - jae ff7remake_.exe+AFB73C
+ff7remake_.exe+AFB721: F6 05 B8 1F CA 04 10  - test byte ptr [ff7remake_.exe+579D6E0],10
+ff7remake_.exe+AFB728: 77 12                 - ja ff7remake_.exe+AFB73C
+ff7remake_.exe+AFB72A: 48 8B 80 60 3E 00 00  - mov rax,[rax+00003E60]
+ff7remake_.exe+AFB731: 0F B6 CB              - movzx ecx,bl
+ff7remake_.exe+AFB734: 48 C1 E1 06           - shl rcx,06
+// ---------- INJECTING HERE ----------
+ff7remake_.exe+AFB738: 89 7C 01 30           - mov [rcx+rax+30],edi
+// ---------- DONE INJECTING  ----------
+ff7remake_.exe+AFB73C: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+ff7remake_.exe+AFB741: 48 83 C4 20           - add rsp,20
+ff7remake_.exe+AFB745: 5F                    - pop rdi
+ff7remake_.exe+AFB746: C3                    - ret 
+ff7remake_.exe+AFB747: CC                    - int 3 
+ff7remake_.exe+AFB748: CC                    - int 3 
+ff7remake_.exe+AFB749: CC                    - int 3 
+ff7remake_.exe+AFB74A: CC                    - int 3 
+ff7remake_.exe+AFB74B: CC                    - int 3 
+ff7remake_.exe+AFB74C: CC                    - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"max mp"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>define(address,"ff7remake_.exe"+AFB93F)
+define(bytes,89 7C 08 38 48 8B 5C 24 30)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000,"ff7remake_.exe"+AFB93F)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //rax:pointer
+  //rcx:index
+  mov edi,[rax+rcx+3C]
+  mov [rax+rcx+38],edi
+  mov rbx,[rsp+30]
+  jmp return
+
+address:
+  jmp newmem
+  nop 4
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+  // mov [rax+rcx+38],edi
+  // mov rbx,[rsp+30]
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ff7remake_.exe+AFB93F
+
+ff7remake_.exe+AFB914: 74 08                 - je ff7remake_.exe+AFB91E
+ff7remake_.exe+AFB916: 48 8B C8              - mov rcx,rax
+ff7remake_.exe+AFB919: E8 E2 A9 02 00        - call ff7remake_.exe+B26300
+ff7remake_.exe+AFB91E: 48 89 05 C3 1D CA 04  - mov [ff7remake_.exe+579D6E8],rax
+ff7remake_.exe+AFB925: 80 FB 08              - cmp bl,08
+ff7remake_.exe+AFB928: 73 19                 - jae ff7remake_.exe+AFB943
+ff7remake_.exe+AFB92A: 48 8B 80 80 6D 0B 00  - mov rax,[rax+000B6D80]
+ff7remake_.exe+AFB931: 0F B6 CB              - movzx ecx,bl
+ff7remake_.exe+AFB934: 48 C1 E1 06           - shl rcx,06
+ff7remake_.exe+AFB938: 48 8B 80 60 3E 00 00  - mov rax,[rax+00003E60]
+// ---------- INJECTING HERE ----------
+ff7remake_.exe+AFB93F: 89 7C 08 38           - mov [rax+rcx+38],edi
+// ---------- DONE INJECTING  ----------
+ff7remake_.exe+AFB943: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+ff7remake_.exe+AFB948: 48 83 C4 20           - add rsp,20
+ff7remake_.exe+AFB94C: 5F                    - pop rdi
+ff7remake_.exe+AFB94D: C3                    - ret 
+ff7remake_.exe+AFB94E: CC                    - int 3 
+ff7remake_.exe+AFB94F: CC                    - int 3 
+ff7remake_.exe+AFB950: 40 53                 - push rbx
+ff7remake_.exe+AFB952: 48 83 EC 20           - sub rsp,20
+ff7remake_.exe+AFB956: 48 8B 05 8B 1D CA 04  - mov rax,[ff7remake_.exe+579D6E8]
+ff7remake_.exe+AFB95D: 0F B6 D9              - movzx ebx,cl
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"公路战"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>define(address,"ff7remake_.exe"+1578E46)
+define(bytes,41 89 AE 04 01 00 00)
+
+[ENABLE]
+
+assert(address,bytes)
+alloc(newmem,$1000,"ff7remake_.exe"+1578E46)
+
+label(code player)
+label(return)
+
+newmem:
+  pushf
+  push rax
+  mov rax [r14+100]
+  cmp eax,1 // 1是克劳德，2可能是敌人
+  je player
+
+  xor ebp,ebp
+  jmp code
+
+player:
+  mov ebp [r14+108]
+
+code:
+  pop rax
+  popf
+  mov [r14+00000104],ebp
+  jmp return
+
+address:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+
+address:
+  db bytes
+  // mov [r14+00000104],ebp
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ff7remake_.exe+1578E46
+
+ff7remake_.exe+1578E20: 3B CD                 - cmp ecx,ebp
+ff7remake_.exe+1578E22: 7C 0E                 - jl ff7remake_.exe+1578E32
+ff7remake_.exe+1578E24: 41 8B 86 08 01 00 00  - mov eax,[r14+00000108]
+ff7remake_.exe+1578E2B: 3B C8                 - cmp ecx,eax
+ff7remake_.exe+1578E2D: 0F 4C C1              - cmovl eax,ecx
+ff7remake_.exe+1578E30: 8B E8                 - mov ebp,eax
+ff7remake_.exe+1578E32: 48 8B 5C 24 50        - mov rbx,[rsp+50]
+ff7remake_.exe+1578E37: 44 2B E5              - sub r12d,ebp
+ff7remake_.exe+1578E3A: 45 01 A6 74 03 00 00  - add [r14+00000374],r12d
+ff7remake_.exe+1578E41: 48 8B 74 24 60        - mov rsi,[rsp+60]
+// ---------- INJECTING HERE ----------
+ff7remake_.exe+1578E46: 41 89 AE 04 01 00 00  - mov [r14+00000104],ebp
+// ---------- DONE INJECTING  ----------
+ff7remake_.exe+1578E4D: 48 8B 6C 24 58        - mov rbp,[rsp+58]
+ff7remake_.exe+1578E52: 48 83 C4 20           - add rsp,20
+ff7remake_.exe+1578E56: 41 5F                 - pop r15
+ff7remake_.exe+1578E58: 41 5E                 - pop r14
+ff7remake_.exe+1578E5A: 41 5D                 - pop r13
+ff7remake_.exe+1578E5C: 41 5C                 - pop r12
+ff7remake_.exe+1578E5E: 5F                    - pop rdi
+ff7remake_.exe+1578E5F: C3                    - ret 
+ff7remake_.exe+1578E60: 8B 81 08 01 00 00     - mov eax,[rcx+00000108]
+ff7remake_.exe+1578E66: 85 C0                 - test eax,eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>HP被攻击 :mov [rcx+rax+30],edi</Description>
+      <AddressString>ff7remake_.exe+AFB738</AddressString>
+      <Before>
+        <Byte>CB</Byte>
+        <Byte>48</Byte>
+        <Byte>C1</Byte>
+        <Byte>E1</Byte>
+        <Byte>06</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>7C</Byte>
+        <Byte>01</Byte>
+        <Byte>30</Byte>
+      </Actual>
+      <After>
+        <Byte>48</Byte>
+        <Byte>8B</Byte>
+        <Byte>5C</Byte>
+        <Byte>24</Byte>
+        <Byte>30</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
